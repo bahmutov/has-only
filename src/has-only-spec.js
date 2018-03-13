@@ -1,10 +1,14 @@
 'use strict'
 
-/* eslint-env mocha */
-const hasOnly = require('.')
+const la = require('lazy-ass')
 
-describe('has-only', () => {
-  it('write this test', () => {
-    console.assert(hasOnly, 'should export something')
+/* eslint-env mocha */
+describe('finds root', () => {
+  const { findRoot } = require('.')
+
+  it('finds the root of these tests', function () {
+    const root = findRoot(this.test)
+    la(root, 'could not find root')
+    la(root.root, 'does not have root: true set', root)
   })
 })
