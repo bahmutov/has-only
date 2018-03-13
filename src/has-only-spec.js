@@ -24,4 +24,18 @@ describe('has-only', () => {
       la(output.includes('code: 0'), output)
     })
   })
+
+  it('finds single it.only', () => {
+    const spec = join(__dirname, '..', 'tests', 'it-only', 'test.js')
+    return execaWrap(mocha, [spec]).then(output => {
+      la(output.includes('code: 1'), output)
+    })
+  })
+
+  it('finds describe.only', () => {
+    const spec = join(__dirname, '..', 'tests', 'describe-only', 'test.js')
+    return execaWrap(mocha, [spec]).then(output => {
+      la(output.includes('code: 1'), output)
+    })
+  })
 })

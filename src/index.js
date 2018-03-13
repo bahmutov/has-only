@@ -50,10 +50,19 @@ function _hasOnly (suite) {
   return suite.suites.some(_hasOnly)
 }
 
+// works with both context and test
+/*
+beforeEach(function () {
+  hasOnly(this.test) // true or false
+  hasOnly(this) // same
+})
+*/
 function hasOnly (test) {
   if (!test) {
     throw new Error('Missing current test')
   }
+  // we can pass both current context or current est
+  test = test.test ? test.test : test
 
   return _hasOnly(findRoot(test))
 }
