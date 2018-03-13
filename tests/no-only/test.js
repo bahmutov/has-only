@@ -1,7 +1,8 @@
 // no "it.only" or "describe.only" in this file
 const hasOnly = require('../../src').hasOnly
 beforeEach(function () {
-  const foundOnly = hasOnly(this.test)
+  // can pass context
+  const foundOnly = hasOnly(this)
   if (foundOnly) {
     console.log('found only')
     process.exit(1)

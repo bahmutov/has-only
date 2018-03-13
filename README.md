@@ -13,10 +13,23 @@
 Requires [Node](https://nodejs.org/en/) version 6 or above.
 
 ```sh
-npm install --save has-only
+npm install --save-dev has-only
 ```
 
 ## Use
+
+Pass current context or test. Returns true or false.
+
+```js
+const {hasOnly} = require('has-only')
+beforeEach(function () {
+  if (hasOnly(this)) {
+    // a test is using it.only
+    // or maybe a suite is using describe.only
+    // to exclude other tests
+  }
+})
+```
 
 ### Small print
 

@@ -1,7 +1,7 @@
 // has single "describe.only"
 const hasOnly = require('../../src').hasOnly
 beforeEach(function () {
-  const foundOnly = hasOnly(this.test)
+  const foundOnly = hasOnly(this)
   if (foundOnly) {
     console.log('found only')
     process.exit(1)
