@@ -31,19 +31,31 @@ function isUnemptyArray (a) {
   The root suite has 1 test and 1 suite, but no "only" items
   The we traverse into "s" and find 1 "_onlyTests" and return true
 */
-function hasOnly (root) {
-  if (!root) {
+function _hasOnly (suite) {
+  if (!suite) {
     return false
   }
-  if (isUnemptyArray(root._onlyTests)) {
+  if (isUnemptyArray(suite._onlyTests)) {
     return true
   }
 
-  if (isUnemptyArray(root._onlySuites)) {
+  if (isUnemptyArray(suite._onlySuites)) {
     return true
   }
 
-  return root.suites.some(hasOnly)
+  if (!Array.isArray(suite.suites)) {
+    return false
+  }
+
+  return suite.suites.some(_hasOnly)
+}
+
+function hasOnly (test) {
+  if (!test) {
+    throw new Error('Missing current test')
+  }
+
+  return _hasOnly(findRoot(test))
 }
 
 module.exports = { findRoot, hasOnly }
