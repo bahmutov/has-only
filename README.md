@@ -31,6 +31,10 @@ beforeEach(function () {
 })
 ```
 
+## Related
+
+* [its-name](https://github.com/bahmutov/its-name) walks from the current context up the chain to give you list of context names
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2018
