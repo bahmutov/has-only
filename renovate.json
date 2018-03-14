@@ -3,8 +3,5 @@
   "automerge": true,
   "major": {
     "automerge": false
-  },
-  "devDependencies": {
-    "automerge": true
   }
 }
