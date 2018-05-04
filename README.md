@@ -19,6 +19,8 @@ npm install --save-dev has-only
 
 ## Use
 
+### `hasOnly`
+
 Pass current context or test. Returns true or false.
 
 ```js
@@ -28,6 +30,20 @@ beforeEach(function () {
     // a test is using it.only
     // or maybe a suite is using describe.only
     // to exclude other tests
+  }
+})
+```
+
+### `hasFailed`
+
+Pass current context or test. Returns true if some test or hook ran and failed.
+
+```js
+const {hasFailed} = require('has-only')
+after(function () {
+  if (hasFailed(this)) {
+    // some test or hook (like before, beforeEach, afterEach, after)
+    // has failed
   }
 })
 ```

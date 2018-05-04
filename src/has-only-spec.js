@@ -15,6 +15,29 @@ describe('finds root', () => {
   })
 })
 
+describe.skip('has-failed', () => {
+  // testing how we can detect failing test or hook
+  const { hasFailed } = require('.')
+  after(function () {
+    const failed = hasFailed(this.test)
+    console.log('has failed?', failed)
+  })
+
+  beforeEach(() => {
+    // throw new Error('failing beforeEach')
+  })
+
+  afterEach(() => {
+    // throw new Error('failing afterEach')
+  })
+
+  it('dummy passing test', () => {})
+
+  it('dummy failing test', () => {
+    throw new Error('nope')
+  })
+})
+
 describe('has-only', () => {
   const mocha = join(__dirname, '..', 'node_modules', '.bin', 'mocha')
 

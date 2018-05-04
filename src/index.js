@@ -50,21 +50,88 @@ function _hasOnly (suite) {
   return suite.suites.some(_hasOnly)
 }
 
-// works with both context and test
+function _hasTestOrHookFailed (test) {
+  console.log(test)
+  return test.state === 'failed'
+}
+
+function _hasFailed (suite) {
+  if (!suite) {
+    return false
+  }
+
+  console.log('suite', suite)
+
+  if (suite.tests && suite.tests.some(_hasTestOrHookFailed)) {
+    return true
+  }
+
+  if (suite._beforeAll && suite._beforeAll.some(_hasTestOrHookFailed)) {
+    return true
+  }
+
+  if (suite._beforeEach && suite._beforeEach.some(_hasTestOrHookFailed)) {
+    return true
+  }
+
+  if (suite._afterEach && suite._afterEach.some(_hasTestOrHookFailed)) {
+    return true
+  }
+
+  if (suite._afterAll && suite._afterAll.some(_hasTestOrHookFailed)) {
+    return true
+  }
+
+  return suite.suites.some(_hasFailed)
+}
+
+//
 /*
 beforeEach(function () {
   hasOnly(this.test) // true or false
   hasOnly(this) // same
 })
 */
+
+/**
+ * Returns true if some suite or test has ".only" flag.
+ *
+ * @param {any} test Context or a test
+ * @returns {boolean} `true` if there is an ".only"
+ * @example beforeEach(function () {
+      hasOnly(this.test) // true or false
+      hasOnly(this) // same
+    })
+ */
 function hasOnly (test) {
   if (!test) {
     throw new Error('Missing current test')
   }
-  // we can pass both current context or current est
+  // we can pass both current context or current test
   test = test.test ? test.test : test
 
   return _hasOnly(findRoot(test))
 }
 
-module.exports = { findRoot, hasOnly }
+/**
+ * Returns true if some test or hook has failed.
+ *
+ * @param {any} test
+ * @returns {boolean} Some test or hook has failed
+ * @example after(function () {
+ *  if (hasFailed(this)) {
+ *    // something went wrong!
+ *  }
+ * })
+ */
+function hasFailed (test) {
+  if (!test) {
+    throw new Error('Missing current test')
+  }
+  // we can pass both current context or current test
+  test = test.test ? test.test : test
+
+  return _hasFailed(findRoot(test))
+}
+
+module.exports = { findRoot, hasOnly, hasFailed }
