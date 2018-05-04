@@ -51,7 +51,6 @@ function _hasOnly (suite) {
 }
 
 function _hasTestOrHookFailed (test) {
-  console.log(test)
   return test.state === 'failed'
 }
 
@@ -59,8 +58,6 @@ function _hasFailed (suite) {
   if (!suite) {
     return false
   }
-
-  console.log('suite', suite)
 
   if (suite.tests && suite.tests.some(_hasTestOrHookFailed)) {
     return true
