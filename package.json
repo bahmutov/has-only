@@ -84,6 +84,6 @@
     "semantic-release": "15.13.12",
     "simple-commit-message": "4.0.3",
     "standard": "11.0.1",
-    "travis-deploy-once": "4.4.1"
+    "travis-deploy-once": "5.0.11"
   }
 }
